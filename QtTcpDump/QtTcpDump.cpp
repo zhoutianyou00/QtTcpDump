@@ -27,9 +27,11 @@ void QtTcpDump::slot_start()
 {
 	int id = ui.m_combox_macs->currentIndex();
 	QString str = ui.lineEdit_filter->text();
-	pcap.StartCapture(id, "capture.bin", str.toStdString().c_str());
-	ui.pushButton_start->setEnabled(false);
-	ui.pushButton_stop->setEnabled(true);
+	if (pcap.StartCapture(id, "capture.bin", str.toStdString().c_str()))
+	{
+		ui.pushButton_start->setEnabled(false);
+		ui.pushButton_stop->setEnabled(true);
+	}
 }
 
 void QtTcpDump::slot_stop()
